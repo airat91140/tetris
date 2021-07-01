@@ -6,6 +6,7 @@
 #define TETRIS_FIGURE_H
 
 #include <QString>
+#include <QGraphicsItem>
 
 namespace tetris {
     /**
@@ -22,7 +23,7 @@ namespace tetris {
     /**
      * @brief abstract class of figure
      */
-    class Figure {
+    class Figure : public QGraphicsItem, public QObject {
     private:
         Color color;
 

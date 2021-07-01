@@ -12,8 +12,7 @@ set(REQUIRED_LIBS Core Gui Widgets)
 set(REQUIRED_LIBS_QUALIFIED Qt6::Core Qt6::Gui Qt6::Widgets)
 
 add_library(${PROJECT_NAME} STATIC
-
-        gamewindow.cpp gamewindow.h gamewindow.ui mainwindow.ui)
+        gamewindow.cpp gamewindow.h gamewindow.ui)
 
 find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED})

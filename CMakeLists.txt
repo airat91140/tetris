@@ -18,7 +18,7 @@ add_subdirectory(src/ui)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
-target_link_libraries(${PROJECT_NAME} figure_lib)
+target_link_libraries(${PROJECT_NAME} figure_lib ui_lib)
 
 find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED})
