@@ -17,14 +17,14 @@ class GameWindow : public QMainWindow
 
 public:
     explicit GameWindow(QWidget *parent = nullptr);
-    ~GameWindow();
+    ~GameWindow() override;
 
 private:
     Ui::GameWindow *ui;
     QGraphicsScene *main_scene, *pocket_scene, *next_scene;
     long count;
     tetris::Figure *next, *current, *pocket;
-    inline const static int x_size = 720, y_size = 1080;
+    const qreal main_scene_w = 347, main_scene_h = 677;
 };
 
 #endif // GAMEWINDOW_H
