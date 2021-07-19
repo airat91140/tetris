@@ -21,9 +21,7 @@ namespace tetris {
     public slots:
         virtual void rotate() {}
     };
-
-
-    };
+};
 
 
 #endif //TETRIS_I_FIGURE_H

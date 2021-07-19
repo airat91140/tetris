@@ -1,7 +1,7 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
 
-#include "i_figure.h"
+#include "z_figure.h"
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameWindow)
@@ -27,7 +27,7 @@ GameWindow::GameWindow(QWidget *parent) :
                             main_scene_h,
                             QPen(Qt::gray));
     }
-    tetris::i_figure one = tetris::i_figure(main_scene_w / 10, main_scene_h / 20);
+    tetris::z_figure one = tetris::z_figure(main_scene_w / 10, main_scene_h / 20);
     one.paint(main_scene);
 }
 

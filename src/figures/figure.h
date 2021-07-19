@@ -20,7 +20,7 @@ namespace tetris {
     protected:
         int angle;
         qreal point_width, point_height;
-        QVector<QSharedPointer<piece> > pieces;
+        QVector<piece *> pieces;
 
         virtual void paint(QGraphicsScene *scene) = 0;
 

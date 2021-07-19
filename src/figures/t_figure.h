@@ -9,8 +9,19 @@
 
 namespace tetris {
     class t_figure : public Figure {
+    private:
+        enum pos {up, left, middle, right};
+    public:
+        void paint(QGraphicsScene *scene) override;
 
+    public:
+        t_figure(qreal width, qreal height, QObject *parent = nullptr);
+        ~t_figure() override = default;
+
+    public slots:
+        virtual void rotate() {}
     };
-}
+};
+
 
 #endif //TETRIS_T_FIGURE_H
