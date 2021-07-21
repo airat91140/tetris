@@ -11,4 +11,17 @@ namespace tetris {
     point_width = width;
     angle = 0;
     }
+
+    void Figure::fall() {
+        for (auto &it : pieces) {
+            it->setPos(it->mapToParent(0, point_height));
+        }
+    }
+
+    void Figure::move(bool is_left) {
+        for (auto &it : pieces) {
+            it->setPos(it->mapToParent(point_width * (is_left ? -1 : 1), 0));
+        }
+    }
+
 }

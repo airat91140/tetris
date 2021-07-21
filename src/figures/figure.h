@@ -22,14 +22,15 @@ namespace tetris {
         qreal point_width, point_height;
         QVector<piece *> pieces;
 
-        virtual void paint(QGraphicsScene *scene) = 0;
-
     public:
+        virtual void paint(QGraphicsScene *scene) = 0;
         explicit Figure(qreal width = 0, qreal height = 0, QObject *parent = nullptr);
         ~Figure() override = default;
+        void move(bool is_left);
 
     public slots:
         virtual void rotate() = 0;
+        virtual void fall();
     };
 }
 

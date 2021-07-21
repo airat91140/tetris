@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QDebug>
+#include <QTimer>
+#include <QKeyEvent>
 
 #include "figure.h"
 
@@ -25,6 +27,8 @@ private:
     long count;
     tetris::Figure *next, *current, *pocket;
     const qreal main_scene_w = 347, main_scene_h = 677;
+    QTimer *timer;
+    bool event(QEvent *event) override;
 };
 
 #endif // GAMEWINDOW_H
