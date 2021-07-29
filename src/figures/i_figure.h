@@ -10,15 +10,19 @@
 namespace tetris {
     class i_figure : public Figure {
     private:
-        enum pos {left, middle_left, middle_right, right};
+        enum pos {
+            left, middle_left, middle_right, right
+        };
     public:
         void paint(QGraphicsScene *scene) override;
 
     public:
         i_figure(qreal width, qreal height, QObject *parent = nullptr);
+
         ~i_figure() override = default;
 
     public slots:
+
         virtual void rotate() {}
     };
 };

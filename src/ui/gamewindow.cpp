@@ -2,12 +2,11 @@
 #include "ui_gamewindow.h"
 
 #include "j_figure.h"
-GameWindow::GameWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::GameWindow)
-{
-    ui->setupUi(this);
 
+GameWindow::GameWindow(QWidget *parent) :
+        QMainWindow(parent),
+        ui(new Ui::GameWindow) {
+    ui->setupUi(this);
     main_scene = new QGraphicsScene();
     ui->mainGraphicsView->setScene(main_scene);
 
@@ -31,24 +30,61 @@ GameWindow::GameWindow(QWidget *parent) :
 
     timer = new QTimer();
     connect(timer, &QTimer::timeout, current, &tetris::Figure::fall);
-    timer->start(1000);
+    timer->start(500);
+    connect(current, &tetris::Figure::signal_check_figure_under, this, &GameWindow::slot_change_current);
 }
 
-GameWindow::~GameWindow()
-{
+GameWindow::~GameWindow() {
     delete ui;
     delete main_scene;
+    delete timer;
+    delete current;
 }
 
-bool GameWindow::event(QEvent *event) {
-    if (event->type() == QEvent::KeyPress) {
-        auto ke = dynamic_cast<QKeyEvent *>(event);
-        if (ke->key() == Qt::Key_A) {
-            current->move(true);
-        }
-        if (ke->key() == Qt::Key_D) {
-            current->move(false);
-        }
+void GameWindow::keyPressEvent(QKeyEvent *ke) {
+    if (ke->key() == Qt::Key_A) {
+        current->move(true);
     }
-    return QMainWindow::event(event);
+    if (ke->key() == Qt::Key_D) {
+        current->move(false);
+    }
+    if (ke->key() == Qt::Key_S) {
+        timer->start(100);
+    }
+}
+
+void GameWindow::keyReleaseEvent(QKeyEvent *ke) {
+    if (ke->key() == Qt::Key_S) {
+        timer->start(500);
+    }
+}
+
+void GameWindow::slot_change_current() {
+    timer->stop();
+    delete current;
+    current = new tetris::j_figure(main_scene_w / 10, main_scene_h / 20);//random_figure_generator();
+    current->paint(main_scene);
+    connect(timer, &QTimer::timeout, current, &tetris::Figure::fall);
+    timer->start();
+    connect(current, &tetris::Figure::signal_check_figure_under, this, &GameWindow::slot_change_current);
+}
+
+tetris::Figure *GameWindow::random_figure_generator() const {
+    switch (QRandomGenerator::global()->bounded(0, 6)) {
+        case (0):
+            return new tetris::i_figure(main_scene_w / 10, main_scene_h / 20);
+        case (1):
+            return new tetris::j_figure(main_scene_w / 10, main_scene_h / 20);
+        case (2):
+            return new tetris::l_figure(main_scene_w / 10, main_scene_h / 20);
+        case (3):
+            return new tetris::o_figure(main_scene_w / 10, main_scene_h / 20);
+        case (4):
+            return new tetris::s_figure(main_scene_w / 10, main_scene_h / 20);
+        case (5):
+            return new tetris::t_figure(main_scene_w / 10, main_scene_h / 20);
+        case (6):
+            return new tetris::z_figure(main_scene_w / 10, main_scene_h / 20);
+    }
+    return nullptr;
 }

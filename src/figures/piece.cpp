@@ -11,9 +11,9 @@ QRectF tetris::piece::boundingRect() const {
 void tetris::piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     QPolygon polygon;
     polygon << QPoint(0, 0)
-            << QPoint( (int)width, 0)
-            << QPoint( (int)width,  (int)height)
-            << QPoint(0,  (int)height);
+            << QPoint((int) width, 0)
+            << QPoint((int) width, (int) height)
+            << QPoint(0, (int) height);
 
     painter->setBrush(color);
     painter->drawPolygon(polygon);
@@ -25,4 +25,11 @@ tetris::piece::piece(qreal width, qreal height, QColor color, QObject *parent) :
     this->width = width;
     this->height = height;
     this->color = color;
+}
+
+QList<QGraphicsItem *> tetris::piece::find_items_under() {
+    return scene()->items(QPolygonF() << mapToScene(0, height)
+                                    << mapToScene(width, height)
+                                    << mapToScene(width, height * 2)
+                                    << mapToScene(0, height * 2));
 }

@@ -10,16 +10,20 @@
 namespace tetris {
     class j_figure : public Figure {
     private:
-        enum pos {down_left, down, middle, up};
+        enum pos {
+            down_left, down, middle, up
+        };
     public:
         void paint(QGraphicsScene *scene) override;
 
     public:
         j_figure(qreal width, qreal height, QObject *parent = nullptr);
+
         ~j_figure() override = default;
 
     public slots:
-        virtual void rotate() {}
+
+        void fall() override;
     };
 };
 

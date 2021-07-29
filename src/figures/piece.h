@@ -27,6 +27,8 @@ namespace tetris {
     public:
         explicit piece(qreal width = 0, qreal height = 0, QColor color = Qt::blue, QObject *parent = nullptr);
 
+        QList<QGraphicsItem *> find_items_under();
+
         ~piece() override = default;
     };
 }

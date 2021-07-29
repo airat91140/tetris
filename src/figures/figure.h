@@ -8,6 +8,7 @@
 #include <QVector>
 #include <QPointf>
 #include <Qpair>
+#include <QGraphicsScene>
 
 #include "piece.h"
 
@@ -21,16 +22,22 @@ namespace tetris {
         int angle;
         qreal point_width, point_height;
         QVector<piece *> pieces;
+        void step_fall();
 
     public:
         virtual void paint(QGraphicsScene *scene) = 0;
+
         explicit Figure(qreal width = 0, qreal height = 0, QObject *parent = nullptr);
+
         ~Figure() override = default;
+
         void move(bool is_left);
 
     public slots:
-        virtual void rotate() = 0;
-        virtual void fall();
+        virtual void fall() {};
+
+    signals:
+        void signal_check_figure_under();
     };
 }
 
