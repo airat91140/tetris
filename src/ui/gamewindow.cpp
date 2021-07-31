@@ -3,10 +3,9 @@
 
 #include "j_figure.h"
 
-GameWindow::GameWindow(QWidget *parent) :
-        QMainWindow(parent),
-        ui(new Ui::GameWindow) {
+GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::GameWindow) {
     ui->setupUi(this);
+    setFocusPolicy(Qt::StrongFocus);
     main_scene = new QGraphicsScene();
     ui->mainGraphicsView->setScene(main_scene);
 
@@ -48,15 +47,10 @@ void GameWindow::keyPressEvent(QKeyEvent *ke) {
     if (ke->key() == Qt::Key_D) {
         current->move(false);
     }
-    if (ke->key() == Qt::Key_S) {
-        timer->start(100);
-    }
 }
 
 void GameWindow::keyReleaseEvent(QKeyEvent *ke) {
-    if (ke->key() == Qt::Key_S) {
-        timer->start(500);
-    }
+
 }
 
 void GameWindow::slot_change_current() {

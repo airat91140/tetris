@@ -19,6 +19,8 @@ namespace tetris {
     public:
         j_figure(qreal width, qreal height, QObject *parent = nullptr);
 
+        void move(bool is_left) override;
+
         ~j_figure() override = default;
 
     public slots:

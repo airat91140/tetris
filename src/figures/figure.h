@@ -23,6 +23,7 @@ namespace tetris {
         qreal point_width, point_height;
         QVector<piece *> pieces;
         void step_fall();
+        void step_move(bool is_left);
 
     public:
         virtual void paint(QGraphicsScene *scene) = 0;
@@ -31,7 +32,9 @@ namespace tetris {
 
         ~Figure() override = default;
 
-        void move(bool is_left);
+        virtual void move(bool is_left) {};
+
+        static bool is_line(QGraphicsItem *it);
 
     public slots:
         virtual void fall() {};
